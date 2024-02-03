@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page d'accueil du site 'https://www.todo.com'">
+    <title>Page d'accueil</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+</head>
+<body>
+    <header></header>
+    <main>
+        <section>
+            <form action="data.php" method="GET"><!---Utilisation de la méthode pour tracer les données qui transitent depuis le formulaire -->
+                <input type="text" id="todoElement" name="todoElement">
+                <input type="submit" id="inputSubmit" value="Ajouter un item">
+                <span></span>
+            </form>
+            <ul>
+                <!--Balise liste où va être stocké chaque tache à faire -->
+                <li><form action="data.php" method="GET">
+                    <input type="checkbox" name="tache1" id="tache1">
+                    <label for="tache1">123</label>
+                    <input type="submit" value="Supprimer">
+                </form></li>
+            </ul>
+        </main>
+        </section>
+    <footer></footer>
+</body>
+</html>
