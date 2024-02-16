@@ -3,11 +3,47 @@ let listeDesTaches=["123"];// "123" est une tâche d'exemple
 let listeDesTachesEffectues=[];
 let listeDesTachesSupprimes=[];
 
+// Créer une fonction d'ajout d'élement dans le tableau des tâches initialement vide
+
+function ajouterTache(tache){
+    if(isNaN(tache)){
+        listeDesTaches.push(tache);
+    }
+    else {
+        tache=tache.toString();
+        listeDesTaches.push(tache);
+    }
+
+    return listeDesTaches;
+}
+
+
+// Créer une fonction qui permet permet de verifier si un élement appartient au tableau des tâches à faire
+function verifierSiTacheDoublon(tache){
+    if(listeDesTaches.indexOf(tache)==-1){// Dans le cas où la tâche n'existe pas dans le tableau
+        return false;
+    }
+    else {// Dans le cas où la tâche existe effectivement dans le tableau
+        return true;
+    }
+}
+
+// test de la fonction de verification d'un tâche si elle est doublon ou pas
+ console.log(verifierSiTacheDoublon("13"));
+
+// Créer une fonction qui permet d'effacer le contenu des messages d'erreurs ou de succès au bout de quelques secondes
+
+function effacerMessageDindication(){
+    setTimeout(function (){
+        spanDeGestionDerreur.textContent="";
+    },900)
+}
+ 
 // Sélection du span contenant le message d'erreur 
 
 let spanDeGestionDerreur=document.querySelector("span");
 
-console.log(spanDeGestionDerreur)
+console.log(spanDeGestionDerreur);
 
 // Sélection de l'input d'ajout de tâche à faire
 let inputTacheAfaire=document.querySelector("#todoElement");
@@ -15,7 +51,7 @@ let inputTacheAfaire=document.querySelector("#todoElement");
 console.log(inputTacheAfaire);
 
 // selection de l'input de la balise formulaire principale
-let formulairePrincipale=document.querySelector("form");
+let formulairePrincipale=document.querySelector("form");// cela va selectionner la première balise form rencontrée dans le code HTML
 console.log(inputSubmit);
 
 // Ajout d'un écouteur d'évenement sur l'input de saisie utilisateur
@@ -45,8 +81,10 @@ formulairePrincipale.addEventListener("submit",(e)=>{
         spanDeGestionDerreur.style.color="red";
         spanDeGestionDerreur.style.fontSize="20px";
 
+        // Effacer le message d'erreur au bout de quelques instants
+        effacerMessageDindication();        
     }
-    else if(listeDesTaches.indexOf(inputTacheAfaire.value)==0){
+    else if(verifierSiTacheDoublon(inputTacheAfaire.value)==true){
            /************************ * Verifier si la tache n'est pas déjà présente et créer une nouvelle condition ***********/
            e.preventDefault();
 
@@ -60,11 +98,16 @@ formulairePrincipale.addEventListener("submit",(e)=>{
 
         // Changer la couleur du message d'erreur
         spanDeGestionDerreur.style.color="rgb(44, 209, 231)";
+
+        // Effacer le message d'erreur au bout de quelques instants
+        effacerMessageDindication();
     }
     else{// si longueur de la saisie supérieur à 1
         e.preventDefault();
         // Ajout de la tâche dans le tableau des tâches à faire
-
+            // Intégration de la fonction d'ajout d'élement dans le tableau des taches à faire
+            ajouterTache(inputTacheAfaire.value)
+        
         // Inserer la tâche dans le document HTML (DOM)
         
         console.log("longueur saisie>1");
@@ -79,9 +122,11 @@ formulairePrincipale.addEventListener("submit",(e)=>{
         // Changer la couleur du message d'erreur
         spanDeGestionDerreur.style.color="green";
 
-        listeDesTaches.push(inputTacheAfaire.value);
+        // Vider l'espace de saisie après ajout de la tâche à faire
         inputTacheAfaire.value="";
 
+        // Effacer le message de succès au bout de quelques instants
+        effacerMessageDindication();
     }
 })
 
