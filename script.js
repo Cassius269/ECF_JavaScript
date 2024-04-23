@@ -17,7 +17,15 @@ function ajouterTache(tache){
     return listeDesTaches;
 }
 
+// Créer une fonction de suppression de tâche dans le tableau
+function supprimerTache(tache){
+    let indexTache = listeDesTaches.findIndex(element => element ===tache );
 
+    if(indexTache != -1){
+        listeDesTaches.splice(indexTache,1);
+        console.log('index',indexTache)
+    }
+}
 // Créer une fonction qui permet permet de verifier si un élement appartient au tableau des tâches à faire
 function verifierSiTacheDoublon(tache){
     if(listeDesTaches.indexOf(tache)==-1){// Dans le cas où la tâche n'existe pas dans le tableau
@@ -163,7 +171,10 @@ baliseUlDesTachesAfaire.addEventListener("click",(event)=>{
         let baliseLiparent=event.target.parentNode.parentNode;
         console.log(baliseLiparent);
         
-        //Suppression de la tâche en supprimant la balise li contenant la tâche
+        //Suppression de la tâche en supprimant la balise li contenant la tâche et dans le tableau des tâches aussi
+        let tache = baliseLiparent.firstElementChild.firstElementChild.nextElementSibling.textContent;
+        console.log(tache);
+        supprimerTache(tache);
         baliseLiparent.remove();
 
     }

@@ -34,5 +34,6 @@ span {
 }
 
 .tacheEffectue{
-    color:grey
+    color:grey;
+    text-decoration:line-through;
 }
